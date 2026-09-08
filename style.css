@@ -1,0 +1,378 @@
+/* ==========================================================================
+   BLOQUE 1: CONFIGURACIÓN BASE Y PANTALLA INTRO INTERACTIVA
+   ========================================================================== */
+
+/* 1.1 Cimientos de la Aplicación */
+body {
+    background-color: #FAF6F0; /* Fondo crema pastel suave y limpio */
+    font-family: 'Fredoka', system-ui, -apple-system, sans-serif; /* Tipografía premium redondeada */
+    color: #655F55; /* Texto marrón ceniza para suavizar el contraste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Evita que salgan barras de navegación dobles en la app */
+}
+
+/* 1.2 Contenedor de la Pantalla de Entrada Inteligente (PC y Celular) */
+#pantalla-intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./fondo-intro.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* 🌟 Centra todo horizontalmente */
+    justify-content: center;   /* Centra todo verticalmente */
+    text-align: center;        /* Centra las líneas de texto */
+    box-sizing: border-box;
+    padding-bottom: 12vh;      /* 🌟 Empuja el texto un poquito hacia el cielo para no tapar los gatitos */
+    background-position: center bottom; /* Mantiene a los gatitos siempre pegados abajo */
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 📱 ADAPTACIÓN AUTOMÁTICA PARA CELULARES */
+@media (max-width: 768px) {
+    #pantalla-intro {
+        background-position: 35% bottom; /* Ajusta el fondo de lado en celular para centrar los mejores gatitos */
+        padding-bottom: 25vh; /* Sube aún más el texto en celular para dar espacio a la pantalla vertical */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .logo-marca-grande {
+        font-size: 3.8rem; /* Aplana un poquito el título en celular para que no se corte */
+    }
+    
+    .subtitulo-intro {
+        font-size: 1rem;
+    }
+}
+
+/* Envoltura interna para centrar el contenido perfectamente */
+.intro-content-wrapper {
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* Nombre de la Marca Grande y Estilizado */
+.logo-marca-grande {
+    font-size: 5.5rem;
+    font-weight: 700;
+    color: #E8AEA9; /* Rosa pastel desaturado, el alma de Etheos */
+    letter-spacing: -3px;
+    margin-bottom: 5px;
+    text-shadow: 0 8px 24px rgba(232, 174, 169, 0.15); /* Efecto de profundidad suave */
+}
+
+.subtitulo-intro {
+    font-size: 1.1rem;
+    color: #8A8171;
+    letter-spacing: 0.5px;
+    margin-bottom: 30px;
+}
+
+/* 1.3 Botón de Entrada Premium con Animación de Latido */
+.btn-entrar-app {
+    background: #FFFFFF;
+    border: 2px solid #EFEAE2;
+    color: #8A8171;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 16px 44px;
+    border-radius: 40px; /* Bordes cápsula muy suaves */
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(232, 174, 169, 0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    animation: latidoSutil 2.5s infinite ease-in-out; /* Activa la respiración del botón */
+}
+
+.btn-entrar-app:hover {
+    transform: scale(1.04) translateY(-3px); /* Pequeño salto controlado hacia arriba */
+    background-color: #FFF9F8;
+    color: #E8AEA9;
+    box-shadow: 0 16px 36px rgba(232, 174, 169, 0.22);
+    border-color: #F8ECE9;
+}
+
+/* 1.4 Efecto de Transición Inmersiva (Desvanecimiento) */
+.fade-out {
+    opacity: 0;
+    transform: scale(1.08); /* Se expande un poco mientras desaparece */
+    pointer-events: none; /* Desactiva clics durante la animación */
+}
+
+/* Keyframes de la animación de respiración */
+@keyframes latidoSutil {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+/* ==========================================================================
+   BLOQUE 2: DISTRIBUCIÓN DEL ESPACIO (SIDEBAR LATERAL Y VIEWPORT DERECHO)
+   ========================================================================== */
+
+/* 2.1 Workspace Principal (Oculto al inicio mediante JS inline) */
+#app-principal {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 2.2 Componente: Barra Lateral de Navegación Fija */
+.sidebar-kawaii {
+    width: 290px; /* Ancho perfecto para que respiren los textos */
+    background-color: #FFFFFF;
+    border-right: 2px solid #EFEAE2; /* Separador sutil desaturado */
+    display: flex;
+    flex-direction: column;
+    padding: 45px 24px;
+    height: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Evita que el menú se encoja en pantallas pequeñas */
+}
+
+/* Contenedor superior de la marca en el menú */
+.sidebar-brand-wrapper {
+    margin-bottom: 50px;
+    padding-left: 12px;
+}
+
+.sidebar-brand {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #E8AEA9; /* Rosa pastel identitario */
+    letter-spacing: -1px;
+}
+
+/* 2.3 Menú de Navegación de Pestañas */
+.nav-menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Separación balanceada entre botones */
+    flex-grow: 1; /* Empuja el footer hacia abajo */
+}
+
+/* Botones de Navegación del Menú */
+.btn-nav-item {
+    display: flex;
+    align-items: center;
+    color: #8A8171;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 14px 20px;
+    border-radius: 16px; /* Bordes redondeados integrales */
+    text-decoration: none; /* Quita la línea azul de los enlaces */
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Icono dentro del botón de navegación */
+.icono-nav {
+    font-size: 1.2rem;
+    margin-right: 14px;
+    display: inline-block;
+}
+
+/* Estados Hover y Activo del Menú */
+.btn-nav-item:hover, .btn-nav-item.active {
+    background-color: #FAF6F0; /* Fondo crema suave */
+    color: #E8AEA9 !important; /* Texto rosa */
+    transform: translateX(5px); /* Pequeño desplazamiento interactivo a la derecha */
+}
+
+/* Pie de página de la barra lateral */
+.sidebar-footer {
+    padding-left: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+}
+
+/* 2.4 Componente: Escenario de Contenido Operativo (Viewport) */
+.main-viewport {
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto; /* Permite scroll vertical únicamente dentro de esta zona */
+    padding: 60px;
+    background-color: #FAF6F0; /* Fondo crema global */
+    box-sizing: border-box;
+}
+
+/* 2.5 Sistema de Control de Pantallas SPA */
+.seccion-app {
+    display: none; /* Mantiene ocultas las secciones inactivas */
+    width: 100%;
+}
+
+/* Muestra únicamente la sección que tenga la clase active */
+.seccion-app.active {
+    display: block;
+    animation: deslizarEntradaView 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Animación de entrada fluida hacia arriba para las secciones */
+@keyframes deslizarEntradaView {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+/* ==========================================================================
+   BLOQUE 3: COMPONENTES INTERNOS (TARJETAS, CHAT DE IA Y FORMULARIOS)
+   ========================================================================= */
+
+/* 3.1 Paneles y Contenedores con Profundidad Estética */
+.panel-container {
+    background-color: #FFFFFF;
+    border: 1px solid #EFEAE2;
+    border-radius: 28px; /* Bordes redondeados elegantes */
+    padding: 50px;
+    box-shadow: 0 12px 40px rgba(101, 95, 85, 0.03) !important; /* Sombra ultra suave */
+    max-width: 950px;
+    margin: 0 auto; /* Centra el panel en el viewport derecho */
+    box-sizing: border-box;
+}
+
+/* Delimitación de anchos máximos para que no se deformen en pantallas grandes */
+.max-width-chat-panel {
+    max-width: 750px;
+}
+
+.max-width-form-panel {
+    max-width: 650px;
+}
+
+/* Títulos de las Secciones */
+.title-seccion {
+    color: #7E7466; /* Tono tierra desaturado */
+    font-weight: 700;
+}
+
+.text-descripcion {
+    color: #8A8171;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+/* Etiqueta flotante de la Home */
+.badge-tag {
+    background-color: #F4EFE6;
+    color: #8A8171;
+    border: 1px solid #E5DEC9;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* 3.2 Botones de Acción Estilo Pastel */
+.btn-action-primary {
+    background-color: #F3CFC6; /* Rosa pastel desaturado */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 38px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.btn-action-primary:hover {
+    background-color: #EBB6AB;
+    color: #FFFFFF;
+    transform: translateY(-2px); /* Desplazamiento interactivo al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(243, 207, 198, 0.3);
+}
+
+/* Botones de Filtro del Catálogo */
+.btn-pill-filter {
+    background-color: #FFFFFF;
+    border: 1px solid #EFEAE2;
+    color: #8A8171;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    padding: 8px 22px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-pill-filter.active, .btn-pill-filter:hover {
+    background-color: #D3E4E9; /* Azul clarito pastel sutil */
+    color: #5B6E75;
+    border-color: #B9D0D6;
+}
+
+/* 3.3 Entradas de Texto Premium (Formularios y Chat) */
+.label-custom-premium {
+    color: #8A8171;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.input-premium-field {
+    background-color: #FAF6F0;
+    border: 1px solid #EFEAE2;
+    border-radius: 16px;
+    padding: 14px;
+    color: #655F55;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.input-premium-field:focus {
+    background-color: #FFFFFF;
+    border-color: #F3CFC6;
+    box-shadow: 0 0 0 0.25rem rgba(243, 207, 198, 0.2); /* Brillo suave rosa al escribir */
+}
+
+/* 3.4 Interfaz de Conversación Envolvente (Tutor IA) */
+.chat-main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 480px;
+    background: #FFFFFF;
+    border: 1px solid #EFEAE2;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.chat-messages-viewport {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #FCFAF7; /* Fondo del chat un tris diferente para dar contraste */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Burbujas del Chat */
+.bubble-message {
+    max-width: 80%;
+    padding: 14px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.message-system {
+    background-color: #FFFFFF;
+    border: 1px solid #EFEAE2;
+    border-bottom-left-radius: 4px; /* Efecto colita de diálogo */
+    color: #655F55;
+}

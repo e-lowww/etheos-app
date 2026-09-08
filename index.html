@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etheos 💌 Tu Espacio de Pasiones</title>
+    
+    <!-- Inyección de Fuentes y Framework de Estructuración -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    
+    <!-- Enlace al archivo de estilos que armaremos después -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--  PANEL 1: PANTALLA DE ENTRADA INMERSIVA (INTRO) -->
+    <div id="pantalla-intro">
+        <div class="intro-content-wrapper">
+            <div class="logo-marca-grande">ETHEOS</div>
+            <p class="subtitulo-intro">¡Alimenta tus pasiones a tu propio ritmo!</p>
+            <button id="btn-entrar" class="btn-entrar-app" onclick="entrarAApp()">
+                Entrar al espacio...ツ
+            </button>
+        </div>
+    </div>
+
+    <!-- 🧸 PANEL 2: WORKSPACE PRINCIPAL DE LA APP (DOCK LATERAL + VIEWPORT) -->
+    <div id="app-principal">
+        
+        <!-- COMPONENTE: BARRA LATERAL NAVEGABLE (SIDEBAR) -->
+        <aside class="sidebar-kawaii">
+            <div class="sidebar-brand-wrapper">
+                <div class="sidebar-brand">Etheos</div>
+            </div>
+            
+            <nav class="nav-menu-container">
+                <a class="btn-nav-item active" id="tab-home" href="#" onclick="cambiarSeccion('home')">
+                    <span class="icono-nav">🏡</span>
+                    <span class="texto-nav">inicio</span>
+                </a>
+                <a class="btn-nav-item" id="tab-explorar" href="#" onclick="cambiarSeccion('explorar')">
+                    <span class="icono-nav">💤</span>
+                    <span class="texto-nav">descubrir</span>
+                </a>
+                <a class="btn-nav-item" id="tab-ia" href="#" onclick="cambiarSeccion('ia')">
+                    <span class="icono-nav">🦑</span>
+                    <span class="texto-nav">mentor ia</span>
+                </a>
+                <a class="btn-nav-item" id="tab-contacto" href="#" onclick="cambiarSeccion('contacto')">
+                    <span class="icono-nav">📬</span>
+                    <span class="texto-nav">buzón</span>
+                </a>
+            </nav>
+            
+            <!-- Pie de la barra lateral para dar sensación de orden -->
+            <div class="sidebar-footer">
+                <small class="text-muted">v1.0.0 • jóvenes creativos.</small>
+            </div>
+        </aside>
+
+        <!-- COMPONENTE: CONTENEDOR OPERATIVO DERECHO (VIEWPORT) -->
+        <main class="main-viewport">
+            
+            <!-- SECCIÓN INTERACTIVA: INICIO (HOME PANEL) -->
+            <section id="sec-home" class="seccion-app active">
+                <div class="panel-container container-hero-app">
+                    <div class="badge-tag-wrapper">
+                        <span class="badge-tag">💕-El rincón del conocimiento libre.-</span>
+                    </div>
+                    <h1 class="title-seccion display-4">ALIMENTA TUS PASIONES</h1>
+                    <p class="text-muted sub-seccion">
+                    Un entorno inmersivo diseñado para explorar videos, artículos y poemas sobre tus hobbys preferidos, sin presiones académicas ni límites de tiempo. Aprende porque quieres, no por ganar una nota.
+                    </p>
+                    <div class="action-wrapper">
+                        <button class="btn-action-primary" onclick="cambiarSeccion('explorar')">
+                            empezar a descubrir 🎈
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN INTERACTIVA: DESCUBRIR (CATÁLOGO DINÁMICO) -->
+            <section id="sec-explorar" class="seccion-app">
+                <div class="panel-container">
+                    <div class="header-seccion text-center mb-5">
+                        <h2 class="title-seccion display-6">CATÁLOGO DE HOBBYS🌼</h2>
+                        <p class="text-muted sub-seccion">Filtra y selecciona el contenido interactivo almacenado en el servidor.</p>
+                    </div>
+                    
+                    <!-- Módulo de Filtros Fluidos -->
+                    <div class="filter-bar-container d-flex justify-content-center gap-2 mb-5">
+                        <button class="btn-pill-filter active" onclick="filtrarContenido('todos')">todo 🌤️</button>
+                        <button class="btn-pill-filter" onclick="filtrarContenido('Video')">videos 🎬</button>
+                        <button class="btn-pill-filter" onclick="filtrarContenido('Artículo')">artículos 💬</button>
+                    </div>
+                    
+                    <!-- Grid Envolvente de Tarjetas -->
+                    <div id="contenedor-pasiones" class="row g-4 justify-content-center grid-pasiones-layout">
+                        <!-- El estado inicial muestra un mensaje de espera elegante -->
+                        <div class="col-12 text-center text-muted py-5 status-loading-wrapper">
+                            <div class="spinner-placeholder mb-3"></div>
+                            <p class="m-0">Esperando respuesta del servidor local de Etheos...☁️</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN INTERACTIVA: MENTOR IA (WORKSPACE DE CHAT) -->
+            <section id="sec-ia" class="seccion-app">
+                <div class="panel-container max-width-chat-panel">
+                    <div class="header-seccion text-center mb-4">
+                        <h3 class="title-seccion">MENTOR VOCACIONAL 🦋</h3>
+                        <p class="text-muted sub-seccion">Explora mapas de aprendizaje guiados por IA según tus pasiones.</p>
+                    </div>
+                    
+                    <div class="chat-main-layout">
+                        <!-- Caja de historial de conversación -->
+                        <div class="chat-messages-viewport mb-4 p-4">
+                            <div class="bubble-message message-system">
+                                <p class="m-0">¡Hola! Cuéntame cuáles son tus hobbys o qué te apasiona hacer en tu tiempo libre, y te generaré una ruta interactiva de aprendizaje personalizada de inmediato.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Caja de control y entrada de texto -->
+                        <div class="chat-control-input-group d-flex gap-3">
+                            <input type="text" class="form-control input-premium-field" placeholder="Escribe intereses aquí...">
+                            <button class="btn-action-primary btn-chat-send">enviar 🕊️</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN INTERACTIVA: BUZÓN (FORMULARIO DE APORTES) -->
+            <section id="sec-contacto" class="seccion-app">
+                <div class="panel-container max-width-form-panel">
+                    <div class="header-seccion text-center mb-5">
+                        <h3 class="title-seccion">BUZÓN DE SUGERENCIAS 📬</h3>
+                        <p class="text-muted sub-seccion">¿Conoces algún recurso o video de gran valor? Registra tu aporte en el servidor de la comunidad:</p>
+                    </div>
+                    
+                    <form id="form-sugerencia" onsubmit="event.preventDefault();">
+                        <div class="form-field-group mb-4">
+                            <label class="form-label label-custom-premium">Tu nombre de usuario=</label>
+                            <input type="text" class="form-control input-premium-field" placeholder="Ej. Jann">
+                        </div>
+                        <br>
+                        <div class="form-field-group mb-4">
+                            <label class="form-label label-custom-premium">Enlace del recurso educativo=</label>
+                            <input type="url" class="form-control input-premium-field" placeholder="https://youtu.be/com">
+                        </div>
+                        <br>
+                        <div class="form-field-group mb-4">
+                            <label class="form-label label-custom-premium">¿Por qué este contenido inspira tu pasión?</label>
+                           <input type="text" class="form-control input-premium-field" placeholder="¿qué hace aprender?"></textarea>
+                        </div>
+                        <br>
+                        <div class="form-submit-wrapper mt-4">
+                            <button type="submit" class="btn-action-primary w-100 py-3 structure-btn-submit">
+                                >>Registrar recurso en la aplicación! 🧸
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Enlace a la lógica interactiva del sistema (Navegación instantánea) -->
+    <script src="app.js"></script>
+</body>
+</html>
