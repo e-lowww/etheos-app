@@ -3,171 +3,1048 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etheos 💌 Tu Espacio de Pasiones</title>
-    
-    <!-- Inyección de Fuentes y Framework de Estructuración -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link href="https://jsdelivr.net" rel="stylesheet">
-    
-    <!-- Enlace al archivo de estilos que armaremos después -->
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="description"
+        content="ETHEOS: un espacio para descubrir conocimiento a través de tus pasiones."
+    >
+
+    <meta name="theme-color" content="#FAF6F0">
+
+    <title>ETHEOS — Tu espacio de pasiones</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
-    <!--  PANEL 1: PANTALLA DE ENTRADA INMERSIVA (INTRO) -->
-    <div id="pantalla-intro">
+    <!-- =========================================================
+         ETHEOS
+         El carácter divino del conocimiento a través de tus pasiones
+         ========================================================= -->
+
+
+    <!-- =========================================================
+         PANTALLA DE INTRODUCCIÓN
+         ========================================================= -->
+
+    <div id="pantalla-intro" class="intro-screen">
+
+        <div class="intro-overlay"></div>
+
         <div class="intro-content-wrapper">
-            <div class="logo-marca-grande">ETHEOS</div>
-            <p class="subtitulo-intro">¡Alimenta tus pasiones a tu propio ritmo!</p>
-            <button id="btn-entrar" class="btn-entrar-app" onclick="entrarAApp()">
-                Entrar al espacio...ツ
+
+            <span class="intro-eyebrow">
+                Un espacio para aprender por pasión
+            </span>
+
+            <div class="logo-marca-grande">
+                ETHEOS
+            </div>
+
+            <p class="subtitulo-intro">
+                ¡Alimenta tus pasiones a tu propio ritmo!
+            </p>
+
+            <p class="intro-description">
+                Descubre contenido, explora nuevas ideas y transforma
+                tus intereses en conocimiento.
+            </p>
+
+            <button
+                id="btn-entrar"
+                class="btn-entrar-app"
+                type="button"
+                onclick="entrarAApp()"
+            >
+                <span>Entrar al espacio</span>
+                <span aria-hidden="true">→</span>
             </button>
+
+            <span class="intro-note">
+                Sin notas. Sin presión. Solo curiosidad.
+            </span>
+
         </div>
+
     </div>
 
-    <!-- 🧸 PANEL 2: WORKSPACE PRINCIPAL DE LA APP (DOCK LATERAL + VIEWPORT) -->
-    <div id="app-principal">
-        
-        <!-- COMPONENTE: BARRA LATERAL NAVEGABLE (SIDEBAR) -->
-        <aside class="sidebar-kawaii">
+
+    <!-- =========================================================
+         APLICACIÓN PRINCIPAL
+         ========================================================= -->
+
+    <div id="app-principal" class="app-layout">
+
+
+        <!-- =====================================================
+             SIDEBAR
+             ===================================================== -->
+
+        <aside class="sidebar-kawaii" aria-label="Navegación principal">
+
+            <!-- Marca -->
             <div class="sidebar-brand-wrapper">
-                <div class="sidebar-brand">Etheos</div>
+
+                <div class="sidebar-brand">
+                    <span class="brand-symbol">✦</span>
+                    <span>Etheos</span>
+                </div>
+
+                <span class="brand-tagline">
+                    knowledge • passion
+                </span>
+
             </div>
-            
+
+
+            <!-- Navegación -->
             <nav class="nav-menu-container">
-                <a class="btn-nav-item active" id="tab-home" href="#" onclick="cambiarSeccion('home')">
-                    <span class="icono-nav">🏡</span>
-                    <span class="texto-nav">inicio</span>
-                </a>
-                <a class="btn-nav-item" id="tab-explorar" href="#" onclick="cambiarSeccion('explorar')">
-                    <span class="icono-nav">💤</span>
-                    <span class="texto-nav">descubrir</span>
-                </a>
-                <a class="btn-nav-item" id="tab-ia" href="#" onclick="cambiarSeccion('ia')">
-                    <span class="icono-nav">🦑</span>
-                    <span class="texto-nav">mentor ia</span>
-                </a>
-                <a class="btn-nav-item" id="tab-contacto" href="#" onclick="cambiarSeccion('contacto')">
-                    <span class="icono-nav">📬</span>
-                    <span class="texto-nav">buzón</span>
-                </a>
+
+                <span class="nav-section-title">
+                    explorar
+                </span>
+
+                <button
+                    class="btn-nav-item active"
+                    id="tab-home"
+                    type="button"
+                    onclick="cambiarSeccion('home')"
+                >
+                    <span class="icono-nav" aria-hidden="true">⌂</span>
+                    <span class="texto-nav">Inicio</span>
+                </button>
+
+
+                <button
+                    class="btn-nav-item"
+                    id="tab-explorar"
+                    type="button"
+                    onclick="cambiarSeccion('explorar')"
+                >
+                    <span class="icono-nav" aria-hidden="true">✦</span>
+                    <span class="texto-nav">Descubrir</span>
+                </button>
+
+
+                <button
+                    class="btn-nav-item"
+                    id="tab-ia"
+                    type="button"
+                    onclick="cambiarSeccion('ia')"
+                >
+                    <span class="icono-nav" aria-hidden="true">◌</span>
+                    <span class="texto-nav">Mentor IA</span>
+
+                    <span class="nav-status">
+                        IA
+                    </span>
+                </button>
+
+
+                <button
+                    class="btn-nav-item"
+                    id="tab-contacto"
+                    type="button"
+                    onclick="cambiarSeccion('contacto')"
+                >
+                    <span class="icono-nav" aria-hidden="true">♡</span>
+                    <span class="texto-nav">Buzón</span>
+                </button>
+
             </nav>
-            
-            <!-- Pie de la barra lateral para dar sensación de orden -->
-            <div class="sidebar-footer">
-                <small class="text-muted">v1.0.0 • jóvenes creativos.</small>
+
+
+            <!-- Mini tarjeta lateral -->
+            <div class="sidebar-mini-card">
+
+                <span class="mini-card-icon">
+                    ✧
+                </span>
+
+                <div>
+                    <strong>
+                        Tu curiosidad importa.
+                    </strong>
+
+                    <small>
+                        Aprende algo nuevo hoy.
+                    </small>
+                </div>
+
             </div>
+
+
+            <!-- Footer sidebar -->
+            <div class="sidebar-footer">
+
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span>Espacio activo</span>
+                </div>
+
+                <small>
+                    v2.0.0 • jóvenes creativos
+                </small>
+
+            </div>
+
         </aside>
 
-        <!-- COMPONENTE: CONTENEDOR OPERATIVO DERECHO (VIEWPORT) -->
-        <main class="main-viewport">
-            
-            <!-- SECCIÓN INTERACTIVA: INICIO (HOME PANEL) -->
-            <section id="sec-home" class="seccion-app active">
-                <div class="panel-container container-hero-app">
-                    <div class="badge-tag-wrapper">
-                        <span class="badge-tag">💕-El rincón del conocimiento libre.-</span>
+
+
+        <!-- =====================================================
+             CONTENIDO PRINCIPAL
+             ===================================================== -->
+
+        <main class="main-viewport" id="contenido-principal">
+
+
+            <!-- =================================================
+                 HOME
+                 ================================================= -->
+
+            <section
+                id="sec-home"
+                class="seccion-app active"
+                aria-labelledby="titulo-home"
+            >
+
+                <div class="home-grid">
+
+
+                    <!-- Hero principal -->
+                    <div class="panel-container container-hero-app">
+
+                        <div class="hero-top">
+
+                            <span class="badge-tag">
+                                ✦ EL RINCÓN DEL CONOCIMIENTO LIBRE
+                            </span>
+
+                            <span class="hero-version">
+                                ETHEOS / 01
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-content">
+
+                            <p class="hero-kicker">
+                                TU CURIOSIDAD ES EL PUNTO DE PARTIDA
+                            </p>
+
+                            <h1
+                                id="titulo-home"
+                                class="title-seccion hero-title"
+                            >
+                                ALIMENTA
+                                <span>TUS PASIONES.</span>
+                            </h1>
+
+
+                            <p class="text-muted sub-seccion hero-description">
+                                Un entorno inmersivo diseñado para explorar
+                                videos, artículos y contenido sobre tus hobbies
+                                preferidos, sin presiones académicas ni límites
+                                de tiempo.
+                            </p>
+
+                            <p class="hero-highlight">
+                                Aprende porque quieres, no por ganar una nota.
+                            </p>
+
+
+                            <div class="action-wrapper">
+
+                                <button
+                                    class="btn-action-primary"
+                                    type="button"
+                                    onclick="cambiarSeccion('explorar')"
+                                >
+                                    <span>Empezar a descubrir</span>
+                                    <span aria-hidden="true">→</span>
+                                </button>
+
+                                <button
+                                    class="btn-action-secondary"
+                                    type="button"
+                                    onclick="cambiarSeccion('ia')"
+                                >
+                                    Hablar con Mentor IA
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Decoración / concepto -->
+                        <div class="hero-bottom">
+
+                            <div class="hero-stat">
+                                <strong>01</strong>
+                                <span>Explora</span>
+                            </div>
+
+                            <div class="hero-line"></div>
+
+                            <div class="hero-stat">
+                                <strong>02</strong>
+                                <span>Descubre</span>
+                            </div>
+
+                            <div class="hero-line"></div>
+
+                            <div class="hero-stat">
+                                <strong>03</strong>
+                                <span>Aprende</span>
+                            </div>
+
+                        </div>
+
                     </div>
-                    <h1 class="title-seccion display-4">ALIMENTA TUS PASIONES</h1>
-                    <p class="text-muted sub-seccion">
-                    Un entorno inmersivo diseñado para explorar videos, artículos y poemas sobre tus hobbys preferidos, sin presiones académicas ni límites de tiempo. Aprende porque quieres, no por ganar una nota.
-                    </p>
-                    <div class="action-wrapper">
-                        <button class="btn-action-primary" onclick="cambiarSeccion('explorar')">
-                            empezar a descubrir 🎈
+
+
+                    <!-- Panel de bienvenida -->
+                    <aside class="home-side-panel">
+
+                        <div class="panel-container passion-card">
+
+                            <span class="card-eyebrow">
+                                ETHEOS
+                            </span>
+
+                            <h2>
+                                ¿Qué te mueve?
+                            </h2>
+
+                            <p>
+                                El conocimiento también puede comenzar
+                                con algo tan sencillo como aquello que
+                                disfrutas hacer.
+                            </p>
+
+                            <div class="passion-symbols">
+                                <span>✎</span>
+                                <span>◉</span>
+                                <span>♫</span>
+                                <span>✦</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel-container quote-card">
+
+                            <span class="quote-mark">
+                                “
+                            </span>
+
+                            <p>
+                                La curiosidad convierte una pasión
+                                en una puerta hacia el conocimiento.
+                            </p>
+
+                            <span class="quote-line"></span>
+
+                            <small>
+                                filosofía ETHEOS
+                            </small>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 DESCUBRIR
+                 ================================================= -->
+
+            <section
+                id="sec-explorar"
+                class="seccion-app"
+                aria-labelledby="titulo-explorar"
+            >
+
+                <div class="panel-container catalog-panel">
+
+                    <div class="header-seccion catalog-header">
+
+                        <div>
+
+                            <span class="section-kicker">
+                                EXPLORE / 02
+                            </span>
+
+                            <h2
+                                id="titulo-explorar"
+                                class="title-seccion"
+                            >
+                                CATÁLOGO DE HOBBYS
+                            </h2>
+
+                            <p class="text-muted sub-seccion">
+                                Encuentra contenido que despierte tu curiosidad
+                                y convierta tus intereses en conocimiento.
+                            </p>
+
+                        </div>
+
+                        <div class="catalog-counter">
+                            <span id="contador-contenido">03</span>
+                            recursos
+                        </div>
+
+                    </div>
+
+
+                    <!-- Filtros -->
+
+                    <div
+                        class="filter-bar-container"
+                        role="group"
+                        aria-label="Filtrar contenido"
+                    >
+
+                        <button
+                            class="btn-pill-filter active"
+                            type="button"
+                            data-filter="todos"
+                            onclick="filtrarContenido('todos')"
+                        >
+                            Todo
+                        </button>
+
+                        <button
+                            class="btn-pill-filter"
+                            type="button"
+                            data-filter="Video"
+                            onclick="filtrarContenido('Video')"
+                        >
+                            Videos
+                        </button>
+
+                        <button
+                            class="btn-pill-filter"
+                            type="button"
+                            data-filter="Artículo"
+                            onclick="filtrarContenido('Artículo')"
+                        >
+                            Artículos
+                        </button>
+
+                    </div>
+
+
+                    <!-- Contenedor de tarjetas -->
+
+                    <div
+                        id="contenedor-pasiones"
+                        class="catalog-grid"
+                    >
+
+
+                        <!-- =====================================
+                             TARJETA — ARTE
+                             ===================================== -->
+
+                        <article
+                            class="card-hobby-item"
+                            data-tipo="Video"
+                            data-category="arte"
+                        >
+
+                            <div class="hobby-card">
+
+                                <div class="hobby-card-top">
+
+                                    <span class="hobby-number">
+                                        01
+                                    </span>
+
+                                    <span class="content-type">
+                                        VIDEO
+                                    </span>
+
+                                </div>
+
+
+                                <div class="hobby-card-icon">
+                                    ✎
+                                </div>
+
+
+                                <div class="hobby-card-content">
+
+                                    <h3>
+                                        Arte y Dibujo
+                                    </h3>
+
+                                    <p>
+                                        Aprende las 5 técnicas esenciales
+                                        de sombreado —mancha, trama y
+                                        crosshatching— para darle volumen
+                                        a tus dibujos.
+                                    </p>
+
+                                </div>
+
+
+                                <a
+                                    href="https://www.youtube.com/embed/CyMVDYBleDk"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hobby-card-action"
+                                >
+                                    <span>Entrar a aprender</span>
+                                    <span>↗</span>
+                                </a>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- =====================================
+                             TARJETA — CIENCIA
+                             ===================================== -->
+
+                        <article
+                            class="card-hobby-item"
+                            data-tipo="Artículo"
+                            data-category="ciencia"
+                        >
+
+                            <div class="hobby-card">
+
+                                <div class="hobby-card-top">
+
+                                    <span class="hobby-number">
+                                        02
+                                    </span>
+
+                                    <span class="content-type">
+                                        ARTÍCULO
+                                    </span>
+
+                                </div>
+
+
+                                <div class="hobby-card-icon">
+                                    ◉
+                                </div>
+
+
+                                <div class="hobby-card-content">
+
+                                    <h3>
+                                        Ciencia y Astronomía
+                                    </h3>
+
+                                    <p>
+                                        Explora la paradoja de la información
+                                        en los agujeros negros y descubre qué
+                                        ocurre con los datos de la materia que
+                                        cae en ellos.
+                                    </p>
+
+                                </div>
+
+
+                                <a
+                                    href="https://quantumzeitgeist.com/the-information-paradox-what-happens-to-data-that-falls-into-a-black-hole/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hobby-card-action"
+                                >
+                                    <span>Entrar a aprender</span>
+                                    <span>↗</span>
+                                </a>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- =====================================
+                             TARJETA — MÚSICA
+                             ===================================== -->
+
+                        <article
+                            class="card-hobby-item"
+                            data-tipo="Video"
+                            data-category="musica"
+                        >
+
+                            <div class="hobby-card">
+
+                                <div class="hobby-card-top">
+
+                                    <span class="hobby-number">
+                                        03
+                                    </span>
+
+                                    <span class="content-type">
+                                        VIDEO
+                                    </span>
+
+                                </div>
+
+
+                                <div class="hobby-card-icon">
+                                    ♫
+                                </div>
+
+
+                                <div class="hobby-card-content">
+
+                                    <h3>
+                                        Producción Musical
+                                    </h3>
+
+                                    <p>
+                                        Descubre cómo producir y estructurar
+                                        tu propia canción desde cero de forma
+                                        fácil, intuitiva y colaborativa.
+                                    </p>
+
+                                </div>
+
+
+                                <a
+                                    href="https://www.youtube.com/embed/FJ7YwLip6BQ"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hobby-card-action"
+                                >
+                                    <span>Entrar a aprender</span>
+                                    <span>↗</span>
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <!-- Estado vacío para filtros -->
+
+                    <div
+                        id="estado-vacio"
+                        class="empty-state"
+                        hidden
+                    >
+                        <span>✦</span>
+
+                        <h3>
+                            Todavía no hay recursos aquí.
+                        </h3>
+
+                        <p>
+                            Puedes aportar uno desde el buzón de ETHEOS.
+                        </p>
+
+                        <button
+                            class="btn-action-primary"
+                            type="button"
+                            onclick="cambiarSeccion('contacto')"
+                        >
+                            Aportar contenido
                         </button>
                     </div>
+
                 </div>
+
             </section>
 
-            <!-- SECCIÓN INTERACTIVA: DESCUBRIR (CATÁLOGO DINÁMICO) -->
-            <section id="sec-explorar" class="seccion-app">
-                <div class="panel-container">
-                    <div class="header-seccion text-center mb-5">
-                        <h2 class="title-seccion display-6">CATÁLOGO DE HOBBYS🌼</h2>
-                        <p class="text-muted sub-seccion">Filtra y selecciona el contenido interactivo almacenado en el servidor.</p>
-                    </div>
-                    
-                    <!-- Módulo de Filtros Fluidos -->
-                    <div class="filter-bar-container d-flex justify-content-center gap-2 mb-5">
-                        <button class="btn-pill-filter active" onclick="filtrarContenido('todos')">todo 🌤️</button>
-                        <button class="btn-pill-filter" onclick="filtrarContenido('Video')">videos 🎬</button>
-                        <button class="btn-pill-filter" onclick="filtrarContenido('Artículo')">artículos 💬</button>
-                    </div>
-                    
-                    <!-- Grid Envolvente de Tarjetas -->
-                    <div id="contenedor-pasiones" class="row g-4 justify-content-center grid-pasiones-layout">
-                        <!-- El estado inicial muestra un mensaje de espera elegante -->
-                        <div class="col-12 text-center text-muted py-5 status-loading-wrapper">
-                            <div class="spinner-placeholder mb-3"></div>
-                            <p class="m-0">Esperando respuesta del servidor local de Etheos...☁️</p>
+
+
+            <!-- =================================================
+                 MENTOR IA
+                 ================================================= -->
+
+            <section
+                id="sec-ia"
+                class="seccion-app"
+                aria-labelledby="titulo-ia"
+            >
+
+                <div class="panel-container max-width-chat-panel mentor-panel">
+
+
+                    <div class="mentor-header">
+
+                        <div class="mentor-avatar">
+                            ✦
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- SECCIÓN INTERACTIVA: MENTOR IA (WORKSPACE DE CHAT) -->
-            <section id="sec-ia" class="seccion-app">
-                <div class="panel-container max-width-chat-panel">
-                    <div class="header-seccion text-center mb-4">
-                        <h3 class="title-seccion">MENTOR VOCACIONAL 🦋</h3>
-                        <p class="text-muted sub-seccion">Explora mapas de aprendizaje guiados por IA según tus pasiones.</p>
+                        <div>
+
+                            <span class="section-kicker">
+                                ETHEOS INTELLIGENCE / 03
+                            </span>
+
+                            <h2
+                                id="titulo-ia"
+                                class="title-seccion"
+                            >
+                                MENTOR VOCACIONAL
+                            </h2>
+
+                            <p class="text-muted sub-seccion">
+                                Explora rutas de aprendizaje guiadas por IA
+                                según tus pasiones.
+                            </p>
+
+                        </div>
+
+                        <span class="ai-status">
+                            <span></span>
+                            online
+                        </span>
+
                     </div>
-                    
+
+
+                    <!-- Chat -->
+
                     <div class="chat-main-layout">
-                        <!-- Caja de historial de conversación -->
-                        <div class="chat-messages-viewport mb-4 p-4">
+
+                        <div
+                            class="chat-messages-viewport"
+                            id="chat-messages"
+                            aria-live="polite"
+                            aria-label="Conversación con Mentor IA"
+                        >
+
                             <div class="bubble-message message-system">
-                                <p class="m-0">¡Hola! Cuéntame cuáles son tus hobbys o qué te apasiona hacer en tu tiempo libre, y te generaré una ruta interactiva de aprendizaje personalizada de inmediato.</p>
+
+                                <span class="message-label">
+                                    ETHEOS / MENTOR
+                                </span>
+
+                                <p>
+                                    ¡Hola! Cuéntame cuáles son tus hobbies
+                                    o qué te apasiona hacer en tu tiempo libre.
+                                    Puedo ayudarte a descubrir una ruta de
+                                    aprendizaje.
+                                </p>
+
                             </div>
+
                         </div>
-                        
-                        <!-- Caja de control y entrada de texto -->
-                        <div class="chat-control-input-group d-flex gap-3">
-                            <input type="text" class="form-control input-premium-field" placeholder="Escribe intereses aquí...">
-                            <button class="btn-action-primary btn-chat-send">enviar 🕊️</button>
+
+
+                        <!-- Sugerencias rápidas -->
+
+                        <div class="chat-suggestions">
+
+                            <button
+                                type="button"
+                                onclick="usarSugerencia('Me interesa el arte y el dibujo')"
+                            >
+                                🎨 Arte
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="usarSugerencia('Me interesa la música')"
+                            >
+                                🎵 Música
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="usarSugerencia('Me interesa la ciencia y el universo')"
+                            >
+                                🌌 Ciencia
+                            </button>
+
                         </div>
+
+
+                        <!-- Input -->
+
+                        <form
+                            class="chat-control-input-group"
+                            id="form-chat"
+                            onsubmit="event.preventDefault(); enviarMensajeIA();"
+                        >
+
+                            <label
+                                for="input-intereses"
+                                class="sr-only"
+                            >
+                                Escribe tus intereses
+                            </label>
+
+                            <input
+                                id="input-intereses"
+                                type="text"
+                                class="input-premium-field"
+                                placeholder="Cuéntame qué te apasiona..."
+                                autocomplete="off"
+                            >
+
+                            <button
+                                type="submit"
+                                class="btn-chat-send"
+                            >
+                                <span>Enviar</span>
+                                <span aria-hidden="true">→</span>
+                            </button>
+
+                        </form>
+
+
+                        <div class="chat-disclaimer">
+                            Mentor IA de ETHEOS • Explora, pregunta y descubre.
+                        </div>
+
                     </div>
+
                 </div>
+
             </section>
 
-            <!-- SECCIÓN INTERACTIVA: BUZÓN (FORMULARIO DE APORTES) -->
-            <section id="sec-contacto" class="seccion-app">
+
+
+            <!-- =================================================
+                 BUZÓN
+                 ================================================= -->
+
+            <section
+                id="sec-contacto"
+                class="seccion-app"
+                aria-labelledby="titulo-contacto"
+            >
+
                 <div class="panel-container max-width-form-panel">
-                    <div class="header-seccion text-center mb-5">
-                        <h3 class="title-seccion">BUZÓN DE SUGERENCIAS 📬</h3>
-                        <p class="text-muted sub-seccion">¿Conoces algún recurso o video de gran valor? Registra tu aporte en el servidor de la comunidad:</p>
+
+
+                    <div class="form-header">
+
+                        <span class="section-kicker">
+                            COMMUNITY / 04
+                        </span>
+
+                        <h2
+                            id="titulo-contacto"
+                            class="title-seccion"
+                        >
+                            BUZÓN DE SUGERENCIAS
+                        </h2>
+
+                        <p class="text-muted sub-seccion">
+                            La comunidad también construye ETHEOS.
+                            Comparte un recurso que pueda despertar
+                            la pasión de alguien más.
+                        </p>
+
                     </div>
-                    
-                    <form id="form-sugerencia" onsubmit="event.preventDefault();">
-                        <div class="form-field-group mb-4">
-                            <label class="form-label label-custom-premium">Tu nombre de usuario=</label>
-                            <input type="text" class="form-control input-premium-field" placeholder="Ej. Jann">
+
+
+                    <!-- Formulario -->
+
+                    <form
+                        id="form-sugerencia"
+                        novalidate
+                    >
+
+                        <div class="form-field-group">
+
+                            <label
+                                for="nombre-usuario"
+                                class="label-custom-premium"
+                            >
+                                Tu nombre de usuario
+                            </label>
+
+                            <input
+                                id="nombre-usuario"
+                                name="usuario"
+                                type="text"
+                                class="input-premium-field"
+                                placeholder="Ej. Jann"
+                                minlength="3"
+                                autocomplete="nickname"
+                                required
+                            >
+
                         </div>
-                        <br>
-                        <div class="form-field-group mb-4">
-                            <label class="form-label label-custom-premium">Enlace del recurso educativo=</label>
-                            <input type="url" class="form-control input-premium-field" placeholder="https://youtu.be/com">
+
+
+                        <div class="form-field-group">
+
+                            <label
+                                for="enlace-recurso"
+                                class="label-custom-premium"
+                            >
+                                Enlace del recurso educativo
+                            </label>
+
+                            <input
+                                id="enlace-recurso"
+                                name="url"
+                                type="url"
+                                class="input-premium-field"
+                                placeholder="https://..."
+                                required
+                            >
+
+                            <small class="field-help">
+                                Puedes compartir un video, artículo o
+                                recurso educativo.
+                            </small>
+
                         </div>
-                        <br>
-                        <div class="form-field-group mb-4">
-                            <label class="form-label label-custom-premium">¿Por qué este contenido inspira tu pasión?</label>
-                           <input type="text" class="form-control input-premium-field" placeholder="¿qué hace aprender?"></textarea>
+
+
+                        <div class="form-field-group">
+
+                            <label
+                                for="motivo-recurso"
+                                class="label-custom-premium"
+                            >
+                                ¿Por qué este contenido inspira tu pasión?
+                            </label>
+
+                            <textarea
+                                id="motivo-recurso"
+                                name="motivo"
+                                class="input-premium-field"
+                                placeholder="Cuéntanos qué hace especial este contenido..."
+                                rows="5"
+                                minlength="10"
+                                required
+                            ></textarea>
+
                         </div>
-                        <br>
-                        <div class="form-submit-wrapper mt-4">
-                            <button type="submit" class="btn-action-primary w-100 py-3 structure-btn-submit">
-                                >>Registrar recurso en la aplicación! 🧸
+
+
+                        <div class="form-submit-wrapper">
+
+                            <button
+                                type="submit"
+                                class="btn-action-primary structure-btn-submit"
+                            >
+                                <span>Registrar recurso</span>
+                                <span aria-hidden="true">→</span>
                             </button>
+
                         </div>
+
+
+                        <div
+                            id="buzon-feedback"
+                            class="form-feedback"
+                            role="status"
+                            aria-live="polite"
+                        ></div>
+
                     </form>
+
                 </div>
+
             </section>
+
+
+
+            <!-- =================================================
+                 FOOTER GLOBAL
+                 ================================================= -->
+
+            <footer class="main-footer">
+
+                <div class="footer-contenido">
+
+                    <div class="footer-brand">
+
+                        <strong>
+                            ETHEOS
+                        </strong>
+
+                        <span>
+                            El conocimiento nace de la curiosidad.
+                        </span>
+
+                    </div>
+
+
+                    <p class="frase-footer">
+                        "La tecnología no reemplaza el conocimiento;
+                        lo evoluciona."
+                    </p>
+
+
+                    <div class="redes">
+
+                        <a
+                            href="#"
+                            aria-label="GitHub"
+                            title="GitHub"
+                        >
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="LinkedIn"
+                            title="LinkedIn"
+                        >
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                            title="Instagram"
+                        >
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </footer>
 
         </main>
+
     </div>
 
-    <!-- Enlace a la lógica interactiva del sistema (Navegación instantánea) -->
-    <script src="app.js"></script>
+
+    <!-- =========================================================
+         SCRIPT PRINCIPAL
+         ========================================================= -->
+
+    <script src="./app.js"></script>
+
 </body>
 </html>
