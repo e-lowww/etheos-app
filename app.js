@@ -592,10 +592,8 @@ function validarEnlace(enlace) {
    12. GUARDAR RECURSOS EN LOCALSTORAGE
    ========================================================================== */
 
-function guardarRecurso(recurso) {
-
+async function guardarRecurso(recurso) {
     try {
-
         const recursos =
             JSON.parse(
                 localStorage.getItem(
@@ -607,22 +605,44 @@ function guardarRecurso(recurso) {
 
         localStorage.setItem(
             "etheos_recursos",
-            JSON.stringify(
-                recursos
-            )
+            JSON.stringify(recursos)
+        );
+
+        const respuesta = await fetch(
+            "http://localhost:3000/api/sugerencias",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nombre: recurso.nombre,
+                    enlace: recurso.enlace,
+                    motivo: recurso.motivo
+                })
+            }
+        );
+
+        if (!respuesta.ok) {
+            throw new Error(
+                "El servidor no pudo guardar la sugerencia."
+            );
+        }
+
+        const resultado = await respuesta.json();
+
+        console.log(
+            "Sugerencia guardada en el backend:",
+            resultado
         );
 
     } catch (error) {
-
         console.error(
-            "Error al guardar el recurso:",
+            "Error al guardar la sugerencia:",
             error
         );
-
     }
 }
-
-
 /* ==========================================================================
    13. MOSTRAR MENSAJES DEL BUZÓN
    ========================================================================== */
@@ -747,124 +767,108 @@ function cargarHistorialChat() {
 
     }
 }
-
-
 /* ==========================================================================
-   16. INICIALIZACIÓN
+   16. INICIALIZACIÓN Y CARGA DINÁMICA (CORREGIDO PARA COMMIT #10)
    ========================================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+// Nueva función para traer los hobbys desde el servidor Node.js
+async function cargarCatalogoDesdeServidor() {
+    const grid = document.querySelector(".catalog-grid");
+    const contador = document.getElementById("contador-contenido");
+    const estadoVacio = document.getElementById("estado-vacio");
 
-        /* ---------------------------------------
-           FORMULARIO DEL BUZÓN
-           --------------------------------------- */
+    if (!grid) return;
 
-        const formulario =
-            document.getElementById(
-                "form-sugerencia"
-            );
+    try {
+        // Petición HTTP GET al Backend nativo
+        const respuesta = await fetch("http://localhost:3000/api/pasiones");
+        if (!respuesta.ok) throw new Error("Error en la respuesta del servidor");
+        
+        const pasiones = await respuesta.json();
+        
+        // Limpiar el contenedor del catálogo antes de pintar
+        grid.innerHTML = "";
 
-        if (formulario) {
-
-            formulario.addEventListener(
-                "submit",
-                procesarBuzon
-            );
-
+        if (pasiones.length === 0) {
+            if (estadoVacio) estadoVacio.style.display = "block";
+            if (contador) contador.textContent = "0 recursos disponibles";
+            return;
         }
 
+        if (estadoVacio) estadoVacio.style.display = "none";
 
-        /* ---------------------------------------
-           FORMULARIO DEL CHAT
-           --------------------------------------- */
+        // Mapear y renderizar dinámicamente cada Hobby del backend
+        pasiones.forEach((hobby, index) => {
+            // Normalizar categorías para que el script de filtros funcione perfectamente
+            let categoriaFiltro = "arte";
+            let iconoHobby = "✎";
+            const tituloLower = hobby.titulo.toLowerCase();
+            
+            if (tituloLower.includes("ciencia") || tituloLower.includes("astronomía")) {
+                categoriaFiltro = "ciencia";
+                iconoHobby = "◉";
+            } else if (tituloLower.includes("música") || tituloLower.includes("producción")) {
+                categoriaFiltro = "musica";
+                iconoHobby = "♫";
+            }
 
-        const formularioChat =
-            document.getElementById(
-                "form-chat"
-            );
+            const plantillaTarjeta = `
+                <div class="card-hobby-item" data-tipo="${categoriaFiltro}">
+                    <article class="hobby-card">
+                        <div class="hobby-card-top">
+                            <span class="hobby-number">${String(index + 1).padStart(2, '0')} ${hobby.tipo.toUpperCase()}</span>
+                            <span class="content-type">Etheos</span>
+                        </div>
+                        <div class="hobby-card-icon">${iconoHobby}</div>
+                        <div class="hobby-card-content">
+                            <h3>${hobby.titulo}</h3>
+                            <p>${hobby.descripcion}</p>
+                        </div>
+                        <a href="${hobby.link}" target="_blank" class="hobby-card-action">
+                            <span>Entrar a aprender ↗</span>
+                            <span>🏹</span>
+                        </a>
+                    </article>
+                </div>
+            `;
+            grid.insertAdjacentHTML("beforeend", plantillaTarjeta);
+        });
 
-        if (formularioChat) {
-
-            formularioChat.addEventListener(
-                "submit",
-                (event) => {
-
-                    event.preventDefault();
-
-                    enviarMensajeIA();
-
-                }
-            );
-
-        }
-
-
-        /* ---------------------------------------
-           CARGAR HISTORIAL
-           --------------------------------------- */
-
-        cargarHistorialChat();
-
-
-        /* ---------------------------------------
-           FILTRO INICIAL
-           --------------------------------------- */
-
+        // Ejecutar filtro inicial para establecer el estado de la UI
         filtrarContenido("todos");
 
-    }
-);
-
-
-/* ==========================================================================
-   17. ATAJOS DEL TECLADO
-   ========================================================================== */
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        const input =
-            document.getElementById(
-                "input-intereses"
-            );
-
-        // Enter envía el mensaje
-        if (
-            event.key === "Enter" &&
-            document.activeElement === input
-        ) {
-
-            event.preventDefault();
-
-            enviarMensajeIA();
-
+    } catch (error) {
+        console.error("No se pudo conectar con el servidor de Etheos:", error);
+        if (contador) contador.textContent = "Error de conexión";
+        if (estadoVacio) {
+            estadoVacio.querySelector("h3").textContent = "Servidor desconectado 🐌";
+            estadoVacio.querySelector("p").textContent = "Asegúrate de encender el backend en el puerto 3000.";
+            estadoVacio.style.display = "block";
         }
-
     }
-);
+}
 
+// Configuración de los Listeners al iniciar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // Formulario del buzón
+    const formulario = document.getElementById("form-sugerencia");
+    if (formulario) {
+        formulario.addEventListener("submit", procesarBuzon);
+    }
 
-/* ==========================================================================
-   18. EXPONER FUNCIONES PARA EL HTML
-   ========================================================================== */
+    // Formulario del chat
+    const formularioChat = document.getElementById("form-chat");
+    if (formularioChat) {
+        formularioChat.addEventListener("submit", (event) => {
+            event.preventDefault();
+            enviarMensajeIA();
+        });
+    }
 
-window.entrarAApp =
-    entrarAApp;
+    // CARGAR CATÁLOGO REAL DESDE EL BACKEND
+    cargarCatalogoDesdeServidor();
 
-window.cambiarSeccion =
-    cambiarSeccion;
-
-window.filtrarContenido =
-    filtrarContenido;
-
-window.enviarMensajeIA =
-    enviarMensajeIA;
-
-window.usarSugerencia =
-    usarSugerencia;
-
-window.procesarBuzon =
-    procesarBuzon;
+    // Cargar historial local del chat
+    cargarHistorialChat();
+});
