@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "titulo": "Arte y Dibujo",
+    "descripcion": "Aprende las técnicas de sombreado y perspectiva para darle vida a tus ideas.",
+    "tipo": "Video",
+    "link": "https://www.youtube.com/embed/CyMVDYBleDk"
+  },
+  {
+    "id": 2,
+    "titulo": "Ciencia y Astronomía",
+    "descripcion": "Explora los secretos del universo, los agujeros negros y la física cuántica.",
+    "tipo": "Libro/Artículo",
+    "link": "https://quantumzeitgeist.com/the-information-paradox-what-happens-to-data-that-falls-into-a-black-hole/"
+  },
+  {
+    "id": 3,
+    "titulo": "Producción Musical",
+    "descripcion": "Descubre cómo crear tus propios ritmos y canciones desde tu computadora.",
+    "tipo": "Video",
+    "link": "https://www.youtube.com/embed/FJ7YwLip6BQ"
+  }
+]

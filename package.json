@@ -1,0 +1,11 @@
+{
+  "name": "etheos-backend",
+  "version": "1.0.0",
+  "description": "Servidor backend para la plataforma educativa Etheos",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Jóvenes Creativos",
+  "license": "ISC"
+}
